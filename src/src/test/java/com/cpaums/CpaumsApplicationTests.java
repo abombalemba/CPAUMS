@@ -1,4 +1,4 @@
-package com.cpaums.cpaums;
+package com.cpaums;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

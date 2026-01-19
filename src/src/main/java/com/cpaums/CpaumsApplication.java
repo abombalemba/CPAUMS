@@ -1,4 +1,4 @@
-package com.cpaums.cpaums;
+package com.cpaums;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
