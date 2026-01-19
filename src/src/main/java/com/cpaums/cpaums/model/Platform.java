@@ -1,16 +1,10 @@
-package com.appupdatemanager.model;
+package com.cpaums.cpaums.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-
-@Data
-@Entity
-@Table(name = "platforms")
-public class Platform {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true, nullable = false)
-    private String name;
+public enum Platform {
+    ANDROID,
+    WINDOWS,
+	LINUX,
+	IOS,
+    MACOS,
+    WEB
 }
