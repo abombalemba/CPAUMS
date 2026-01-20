@@ -13,5 +13,7 @@ import java.util.Optional;
 public interface AppVersionRepository extends JpaRepository<AppVersion, Long> {
     List<AppVersion> findByPlatform(Platform platform);
 
+    Optional<AppVersion> findByVersion(String version);
+
     Optional<AppVersion> findFirstByPlatformAndIsActiveTrueOrderByReleaseDateDesc(Platform platform);
 }

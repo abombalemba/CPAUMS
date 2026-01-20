@@ -60,4 +60,22 @@ public class UpdateController {
             current
         );
     }
+    
+    @PostMapping("/log")
+    public String logUpdate(
+            @RequestParam String userId,
+            @RequestParam String fromVersion,
+            @RequestParam String toVersion,
+            @RequestParam Platform platform,
+            @RequestParam boolean success) {
+        
+        String logMessage = String.format(
+            "User %s updated from %s to %s on %s. Success: %s",
+            userId, fromVersion, toVersion, platform, success
+        );
+        
+        System.out.println("Update log: " + logMessage);
+        
+        return "Update logged: " + logMessage;
+    }
 }
