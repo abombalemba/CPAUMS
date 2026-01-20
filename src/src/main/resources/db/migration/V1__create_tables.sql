@@ -13,7 +13,5 @@ CREATE TABLE user_devices (
     user_id VARCHAR(255) NOT NULL,
     platform VARCHAR(50) NOT NULL,
     current_version VARCHAR(255) NOT NULL,
-    last_seen TIMESTAMP,
-    device_model VARCHAR(100),
-    os_version VARCHAR(50)
+    last_seen TIMESTAMP
 );
