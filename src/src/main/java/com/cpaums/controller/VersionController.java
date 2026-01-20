@@ -23,7 +23,7 @@ public class VersionController {
     
     @GetMapping("/latest")
     public ResponseEntity<AppVersion> getLatestVersion(@RequestParam Platform platform) {
-        return appVersionRepository.findByPlatform(platform)
+        return appVersionRepository.findFirstByPlatformAndIsActiveTrueOrderByReleaseDateDesc(platform)
                 .stream()
                 .findFirst()
                 .map(ResponseEntity::ok)

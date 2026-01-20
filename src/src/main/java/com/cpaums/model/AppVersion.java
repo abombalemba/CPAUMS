@@ -15,7 +15,7 @@ public class AppVersion {
     private Long id;
 
     @NotBlank(message = "Version string cannot be empty")
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String version;
 
     @NotNull

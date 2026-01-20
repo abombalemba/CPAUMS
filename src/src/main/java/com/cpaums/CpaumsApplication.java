@@ -9,5 +9,4 @@ public class CpaumsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CpaumsApplication.class, args);
 	}
-
 }
