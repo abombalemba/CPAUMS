@@ -2,7 +2,6 @@ package com.cpaums.dto;
 
 import com.cpaums.model.Platform;
 import com.cpaums.model.UpdateType;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -17,7 +16,6 @@ public class CreateAppVersionRequest {
     private Platform platform;
     
     @NotNull(message = "Release date is required")
-    @FutureOrPresent(message = "Release date cannot be in the past")
     private LocalDateTime releaseDate;
     
     @NotBlank(message = "Changelog is required")
