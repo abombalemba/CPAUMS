@@ -2,6 +2,7 @@ package com.cpaums.service;
 
 import com.cpaums.dto.AppVersionResponseDto;
 import com.cpaums.dto.CreateAppVersionRequest;
+import com.cpaums.dto.UpdateAppVersionRequest;
 import com.cpaums.exception.ResourceNotFoundException;
 import com.cpaums.mapper.AppVersionMapper;
 import com.cpaums.model.AppVersion;
@@ -39,5 +40,42 @@ public class AppVersionService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                     "No active versions for platform: " + platform
                 ));
+    }
+
+    public AppVersionResponseDto getVersionById(Long id) {
+        AppVersion version = repository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException(
+                "Version not found with id: " + id
+            ));
+        return mapper.toDto(version);
+    }
+
+    public AppVersionResponseDto updateVersion(Long id, UpdateAppVersionRequest request) {
+        AppVersion version = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                    "Version not found with id: " + id
+                ));
+        
+        if (request.getChangelog() != null) {
+            version.setDescription(request.getChangelog());
+        }
+        if (request.getUpdateType() != null) {
+            version.setUpdateType(request.getUpdateType());
+        }
+        if (request.getIsActive() != null) {
+            version.setActive(request.getIsActive());
+        }
+        
+        AppVersion saved = repository.save(version);
+        return mapper.toDto(saved);
+    }
+
+    public void deleteVersion(Long id) {
+        AppVersion version = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                    "Version not found with id: " + id
+                ));
+        version.setActive(false);
+        repository.save(version);
     }
 }

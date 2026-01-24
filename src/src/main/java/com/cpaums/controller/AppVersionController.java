@@ -2,6 +2,7 @@ package com.cpaums.controller;
 
 import com.cpaums.dto.AppVersionResponseDto;
 import com.cpaums.dto.CreateAppVersionRequest;
+import com.cpaums.dto.UpdateAppVersionRequest;
 import com.cpaums.model.Platform;
 import com.cpaums.service.AppVersionService;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/versions")
@@ -39,4 +41,25 @@ public class AppVersionController {
                 ? ResponseEntity.ok(response) 
                 : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AppVersionResponseDto> getVersionbyId(@PathVariable Long id) {
+        AppVersionResponseDto response = appVersionService.getVersionById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AppVersionResponseDto> updateVersion(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateAppVersionRequest request) {
+        AppVersionResponseDto response = appVersionService.updateVersion(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteVersion(@PathVariable Long id) {
+        appVersionService.deleteVersion(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
