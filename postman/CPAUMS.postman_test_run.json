@@ -1,0 +1,198 @@
+{
+	"id": "13cdf474-fc31-472c-b590-af21076ab6c4",
+	"name": "CPAUMS",
+	"timestamp": "2026-01-24T00:05:06.964Z",
+	"collection_id": "20606298-c8d02188-cd39-4fba-a633-5688fbee7d90",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2026-01-24T00:05:03.838Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "1ad95f77-8154-4705-9d03-c58f662dae6b",
+			"name": "get all versions",
+			"url": "http://localhost:8080/api/versions",
+			"time": 27,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				27
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "64c70dc9-bfee-4494-b600-7a198cc3ebe8",
+			"name": "get latest version of platform",
+			"url": "http://localhost:8080/api/versions/latest?platform=android",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d015d1c3-3a4a-4d1f-9181-22ac07918d4b",
+			"name": "create new version",
+			"url": "http://localhost:8080/api/versions",
+			"time": 24,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				24
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0cb13dcf-ab32-4287-a2c0-ec442937ef7c",
+			"name": "get latest version for user",
+			"url": "http://localhost:8080/api/update/check?userId=test123&current=1.0.0&platform=IOS",
+			"time": 33,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				33
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "dc61b80c-2ca9-41c9-8a77-f0cc07eaf9fc",
+			"name": "user updated to new version",
+			"url": "http://localhost:8080/api/update/log",
+			"time": 28,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				28
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d509ab24-4c10-4798-be72-ebcecf7dbb7b",
+			"name": "get statistic",
+			"url": "http://localhost:8080/api/stats/updates",
+			"time": 166,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				166
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "03d68abd-a05c-454e-8354-ba03fa5cafc4",
+			"name": "get exception",
+			"url": "http://localhost:8080/api/versions/latest?platform=wertyhjukergrthtyrth",
+			"time": 18,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "19ce54bb-fdbc-4bca-b5e8-8188345843bf",
+			"name": "get exception",
+			"url": "http://localhost:8080/api/versions",
+			"time": 99,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				99
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 413,
+	"collection": {
+		"requests": [
+			{
+				"id": "1ad95f77-8154-4705-9d03-c58f662dae6b",
+				"method": "GET"
+			},
+			{
+				"id": "64c70dc9-bfee-4494-b600-7a198cc3ebe8",
+				"method": "GET"
+			},
+			{
+				"id": "d015d1c3-3a4a-4d1f-9181-22ac07918d4b",
+				"method": "POST"
+			},
+			{
+				"id": "0cb13dcf-ab32-4287-a2c0-ec442937ef7c",
+				"method": "GET"
+			},
+			{
+				"id": "dc61b80c-2ca9-41c9-8a77-f0cc07eaf9fc",
+				"method": "POST"
+			},
+			{
+				"id": "d509ab24-4c10-4798-be72-ebcecf7dbb7b",
+				"method": "GET"
+			},
+			{
+				"id": "03d68abd-a05c-454e-8354-ba03fa5cafc4",
+				"method": "GET"
+			},
+			{
+				"id": "19ce54bb-fdbc-4bca-b5e8-8188345843bf",
+				"method": "GET"
+			}
+		]
+	}
+}

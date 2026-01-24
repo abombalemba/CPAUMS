@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "c8d02188-cd39-4fba-a633-5688fbee7d90",
+		"name": "CPAUMS",
+		"description": "test api endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20606298"
+	},
+	"item": [
+		{
+			"name": "get all versions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}/api/versions",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"versions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get latest version of platform",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}/api/versions/latest?platform=android",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"versions",
+						"latest"
+					],
+					"query": [
+						{
+							"key": "platform",
+							"value": "android"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new version",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"version\": \"4.0.0\",\r\n    \"platform\": \"android\",\r\n    \"releaseDate\": \"2026-02-01T10:00:00\",\r\n    \"changelog\": \"Новая фича\",\r\n    \"updateType\": \"mandatory\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/api/versions",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"versions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get latest version for user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}/api/update/check?userId=test123&current=1.0.0&platform=IOS",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"update",
+						"check"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "test123"
+						},
+						{
+							"key": "current",
+							"value": "1.0.0"
+						},
+						{
+							"key": "platform",
+							"value": "IOS"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user updated to new version",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"test123\",\r\n    \"fromVersion\": \"1.0.0\",\r\n    \"toVersion\": \"2.0.0\",\r\n    \"platform\": \"IOS\",\r\n    \"success\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/api/update/log",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"update",
+						"log"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get statistic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/stats/updates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stats",
+						"updates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get exception",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/versions/latest?platform=wertyhjukergrthtyrth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"versions",
+						"latest"
+					],
+					"query": [
+						{
+							"key": "platform",
+							"value": "wertyhjukergrthtyrth"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get exception",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"version\": \"\",\r\n    \"platform\": \"INVALID\",\r\n    \"releaseDate\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/versions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"versions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "http://localhost:8080",
+			"type": "default"
+		}
+	]
+}
