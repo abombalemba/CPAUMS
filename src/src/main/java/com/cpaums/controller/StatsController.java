@@ -27,7 +27,6 @@ public class StatsController {
         
         Map<Platform, Integer> usersCount = new HashMap<>();
         long latestVersionUsers = 0;
-        String latestGlobalVersion = null;
         
         for (Platform platform : Platform.values()) {
             long count = userDeviceRepository.countByPlatform(platform);
@@ -41,23 +40,9 @@ public class StatsController {
                 long countLatest = userDeviceRepository
                     .countByPlatformAndCurrentVersion(platform, latestVersion.getVersion());
                 latestVersionUsers += countLatest;
-                
-                if (latestGlobalVersion == null) {
-                    latestGlobalVersion = latestVersion.getVersion();
-                } else {
-                    AppVersion currentLatest = appVersionRepository
-                        .findByVersion(latestGlobalVersion)
-                        .orElse(null);
-                    
-                    if (currentLatest != null && 
-                        latestVersion.getReleaseDate().isAfter(currentLatest.getReleaseDate())) {
-                        latestGlobalVersion = latestVersion.getVersion();
-                    }
-                }
             }
         }
         
-        stats.setVersion(latestGlobalVersion);
         stats.setUsersCount(usersCount);
         
         long totalUsers = userDeviceRepository.count();

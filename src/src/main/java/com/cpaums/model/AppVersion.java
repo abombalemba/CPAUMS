@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "app_versions")
+@Table(name = "app_versions", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"version", "platform"})
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

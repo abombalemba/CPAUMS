@@ -6,7 +6,6 @@ import java.util.Map;
 
 @Data
 public class UpdateStatsDto {
-    private String version;
     private Map<Platform, Integer> usersCount;
     private Double globalUpdateRate;
 }
