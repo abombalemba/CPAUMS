@@ -1,30 +1,30 @@
 {
-	"id": "6712d1f6-5737-4a0a-a5bc-3d86982514aa",
+	"id": "aed9bb20-cf55-43e1-af46-1d4489cb3a74",
 	"name": "CPAUMS with Auth",
-	"timestamp": "2026-01-25T20:01:28.396Z",
+	"timestamp": "2026-01-25T22:06:45.704Z",
 	"collection_id": "20606298-f16d1c60-e876-45c5-91ff-e7ec965e8fc4",
 	"folder_id": 0,
 	"environment_id": "0",
-	"totalPass": 13,
+	"totalPass": 12,
 	"delay": 0,
 	"persist": true,
 	"status": "finished",
-	"startedAt": "2026-01-25T20:01:20.996Z",
-	"totalFail": 1,
+	"startedAt": "2026-01-25T22:06:33.810Z",
+	"totalFail": 2,
 	"results": [
 		{
 			"id": "085976d1-add1-47d2-85f1-a9c24157a2e0",
 			"name": "register new user",
 			"url": "http://localhost:8080/api/auth/register",
-			"time": 18,
+			"time": 462,
 			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				18
+				462
 			],
 			"allTests": [
 				{}
@@ -34,7 +34,7 @@
 			"id": "570302ca-7799-4b1e-927f-750985e6a80d",
 			"name": "login as ADMIN",
 			"url": "http://localhost:8080/api/auth/login",
-			"time": 750,
+			"time": 1165,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -49,7 +49,7 @@
 				}
 			},
 			"times": [
-				750
+				1165
 			],
 			"allTests": [
 				{
@@ -61,7 +61,7 @@
 			"id": "a65d22c9-202e-402c-bc68-67de7cebb89c",
 			"name": "login as DEVELOPER",
 			"url": "http://localhost:8080/api/auth/login",
-			"time": 599,
+			"time": 2250,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -76,7 +76,7 @@
 				}
 			},
 			"times": [
-				599
+				2250
 			],
 			"allTests": [
 				{
@@ -88,7 +88,7 @@
 			"id": "2570d3ce-ee47-4f00-94b0-8c6bba5ce9c7",
 			"name": "login as USER",
 			"url": "http://localhost:8080/api/auth/login",
-			"time": 775,
+			"time": 1286,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -103,7 +103,7 @@
 				}
 			},
 			"times": [
-				775
+				1286
 			],
 			"allTests": [
 				{
@@ -115,7 +115,7 @@
 			"id": "0838842e-76fe-482a-b0b8-6fef158cabbc",
 			"name": "logout",
 			"url": "http://localhost:8080/api/auth/logout",
-			"time": 22,
+			"time": 63,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -123,7 +123,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				22
+				63
 			],
 			"allTests": [
 				{}
@@ -133,7 +133,7 @@
 			"id": "1f4e6388-e7ae-4c4b-b8df-44e1c87e98c7",
 			"name": "login with wrong password",
 			"url": "http://localhost:8080/api/auth/login",
-			"time": 791,
+			"time": 1481,
 			"responseCode": {
 				"code": 500,
 				"name": "Internal Server Error"
@@ -141,7 +141,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				791
+				1481
 			],
 			"allTests": [
 				{}
@@ -151,7 +151,7 @@
 			"id": "554f759f-7751-44fd-bde4-4c8560f83690",
 			"name": "get all versions (unauthorized)",
 			"url": "http://localhost:8080/api/versions",
-			"time": 14,
+			"time": 35,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -166,7 +166,7 @@
 				}
 			},
 			"times": [
-				14
+				35
 			],
 			"allTests": [
 				{
@@ -178,26 +178,26 @@
 			"id": "d44a84b9-f20a-469d-a4d8-11c452cd40dc",
 			"name": "get all versions (as USER)",
 			"url": "http://localhost:8080/api/versions",
-			"time": 19,
+			"time": 256,
 			"responseCode": {
-				"code": 403,
-				"name": "Forbidden"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {
-				"User can read versions": false
+				"User can read versions": true
 			},
 			"testPassFailCounts": {
 				"User can read versions": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				}
 			},
 			"times": [
-				19
+				256
 			],
 			"allTests": [
 				{
-					"User can read versions": false
+					"User can read versions": true
 				}
 			]
 		},
@@ -205,7 +205,7 @@
 			"id": "65a8ec38-b7ab-4fa4-b063-71511dbbe53e",
 			"name": "get all versions (as ADMIN)",
 			"url": "http://localhost:8080/api/versions",
-			"time": 39,
+			"time": 113,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -220,7 +220,7 @@
 				}
 			},
 			"times": [
-				39
+				113
 			],
 			"allTests": [
 				{
@@ -232,7 +232,7 @@
 			"id": "7df2ccfa-7aaa-432a-8338-e640a4679bdc",
 			"name": "create new version (as USER - should fail)",
 			"url": "http://localhost:8080/api/versions",
-			"time": 28,
+			"time": 44,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -247,7 +247,7 @@
 				}
 			},
 			"times": [
-				28
+				44
 			],
 			"allTests": [
 				{
@@ -259,26 +259,26 @@
 			"id": "54ae0466-23ba-4689-bb0e-d4b19c2b293a",
 			"name": "create new version (as ADMIN)",
 			"url": "http://localhost:8080/api/versions",
-			"time": 245,
+			"time": 126,
 			"responseCode": {
-				"code": 201,
-				"name": "Created"
+				"code": 500,
+				"name": "Internal Server Error"
 			},
 			"tests": {
-				"Admin can create versions": true
+				"Admin can create versions": false
 			},
 			"testPassFailCounts": {
 				"Admin can create versions": {
-					"pass": 1,
-					"fail": 0
+					"pass": 0,
+					"fail": 1
 				}
 			},
 			"times": [
-				245
+				126
 			],
 			"allTests": [
 				{
-					"Admin can create versions": true
+					"Admin can create versions": false
 				}
 			]
 		},
@@ -286,26 +286,26 @@
 			"id": "2b93210c-bc8b-4838-98a0-d4f1c9a8f113",
 			"name": "create new version (as DEVELOPER)",
 			"url": "http://localhost:8080/api/versions",
-			"time": 36,
+			"time": 259,
 			"responseCode": {
-				"code": 201,
-				"name": "Created"
+				"code": 500,
+				"name": "Internal Server Error"
 			},
 			"tests": {
-				"Developer can create versions": true
+				"Developer can create versions": false
 			},
 			"testPassFailCounts": {
 				"Developer can create versions": {
-					"pass": 1,
-					"fail": 0
+					"pass": 0,
+					"fail": 1
 				}
 			},
 			"times": [
-				36
+				259
 			],
 			"allTests": [
 				{
-					"Developer can create versions": true
+					"Developer can create versions": false
 				}
 			]
 		},
@@ -313,15 +313,15 @@
 			"id": "82337708-c5ec-43dd-bcb7-8825e0f13d48",
 			"name": "get version by id",
 			"url": "http://localhost:8080/api/versions/1",
-			"time": 27,
+			"time": 162,
 			"responseCode": {
-				"code": 403,
-				"name": "Forbidden"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				27
+				162
 			],
 			"allTests": [
 				{}
@@ -331,7 +331,7 @@
 			"id": "a5d46eba-c24d-4d52-b6a3-d10e92e4dc4e",
 			"name": "get latest version (public - no auth needed)",
 			"url": "http://localhost:8080/api/versions/latest?platform=android",
-			"time": 18,
+			"time": 51,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -339,7 +339,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				18
+				51
 			],
 			"allTests": [
 				{}
@@ -349,7 +349,7 @@
 			"id": "05fa8eb0-e1be-4844-8f4d-8a613695637f",
 			"name": "update version (as USER - should fail)",
 			"url": "http://localhost:8080/api/versions/1",
-			"time": 31,
+			"time": 45,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -364,7 +364,7 @@
 				}
 			},
 			"times": [
-				31
+				45
 			],
 			"allTests": [
 				{
@@ -376,7 +376,7 @@
 			"id": "a89472a8-cfcd-4841-9083-1d05dec1c788",
 			"name": "update version (as ADMIN)",
 			"url": "http://localhost:8080/api/versions/1",
-			"time": 82,
+			"time": 143,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -384,7 +384,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				82
+				143
 			],
 			"allTests": [
 				{}
@@ -394,7 +394,7 @@
 			"id": "d583f1e6-6dfc-416a-8a6a-f8923bead586",
 			"name": "delete version (as USER - should fail)",
 			"url": "http://localhost:8080/api/versions/1",
-			"time": 21,
+			"time": 110,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -409,7 +409,7 @@
 				}
 			},
 			"times": [
-				21
+				110
 			],
 			"allTests": [
 				{
@@ -421,7 +421,7 @@
 			"id": "19644128-af64-4096-8e83-548a7271b6dd",
 			"name": "delete version (as ADMIN)",
 			"url": "http://localhost:8080/api/versions/1",
-			"time": 37,
+			"time": 140,
 			"responseCode": {
 				"code": 204,
 				"name": "No Content"
@@ -429,7 +429,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				37
+				140
 			],
 			"allTests": [
 				{}
@@ -439,15 +439,15 @@
 			"id": "d7ef4673-bdac-40e7-b1de-187e94aba8f9",
 			"name": "create device (as USER)",
 			"url": "http://localhost:8080/api/devices",
-			"time": 21,
+			"time": 81,
 			"responseCode": {
-				"code": 403,
-				"name": "Forbidden"
+				"code": 201,
+				"name": "Created"
 			},
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				21
+				81
 			],
 			"allTests": [
 				{}
@@ -457,7 +457,7 @@
 			"id": "c7e1525f-616e-4b41-a5bc-ca6a5d4fc627",
 			"name": "get all devices (as USER)",
 			"url": "http://localhost:8080/api/devices",
-			"time": 20,
+			"time": 54,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -465,7 +465,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				20
+				54
 			],
 			"allTests": [
 				{}
@@ -475,7 +475,7 @@
 			"id": "f96992bc-d561-401b-9125-0c79a940146d",
 			"name": "get all devices (as ADMIN - full access)",
 			"url": "http://localhost:8080/api/devices",
-			"time": 39,
+			"time": 101,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -483,7 +483,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				39
+				101
 			],
 			"allTests": [
 				{}
@@ -493,7 +493,7 @@
 			"id": "e27c3dd7-da5a-4bb4-923b-f448f6a68e47",
 			"name": "check update (public - no auth)",
 			"url": "http://localhost:8080/api/update/check?userId=test123&current=1.0.0&platform=IOS",
-			"time": 34,
+			"time": 59,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -501,7 +501,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				34
+				59
 			],
 			"allTests": [
 				{}
@@ -511,7 +511,7 @@
 			"id": "7cf4ec86-38b9-4071-aaae-aada59efe5df",
 			"name": "log update (as USER)",
 			"url": "http://localhost:8080/api/update/log",
-			"time": 38,
+			"time": 126,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -519,7 +519,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				38
+				126
 			],
 			"allTests": [
 				{}
@@ -529,7 +529,7 @@
 			"id": "adb758f9-95d6-4ebf-9e81-c5906d70f584",
 			"name": "get stats (as ADMIN only)",
 			"url": "http://localhost:8080/api/stats/updates",
-			"time": 802,
+			"time": 402,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -544,7 +544,7 @@
 				}
 			},
 			"times": [
-				802
+				402
 			],
 			"allTests": [
 				{
@@ -556,7 +556,7 @@
 			"id": "98291f5f-623f-4656-a0bf-b13484905b0d",
 			"name": "get stats (as USER - should fail)",
 			"url": "http://localhost:8080/api/stats/updates",
-			"time": 18,
+			"time": 99,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -571,7 +571,7 @@
 				}
 			},
 			"times": [
-				18
+				99
 			],
 			"allTests": [
 				{
@@ -583,7 +583,7 @@
 			"id": "c53128f9-8524-4ef8-8004-0f1e4fbfaabc",
 			"name": "access with expired token",
 			"url": "http://localhost:8080/api/versions",
-			"time": 8,
+			"time": 15,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -591,7 +591,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				8
+				15
 			],
 			"allTests": [
 				{}
@@ -601,7 +601,7 @@
 			"id": "85f574e7-524a-4378-95f2-ba5ce3c04d82",
 			"name": "access with invalid token",
 			"url": "http://localhost:8080/api/versions",
-			"time": 9,
+			"time": 22,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -609,7 +609,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				9
+				22
 			],
 			"allTests": [
 				{}
@@ -619,7 +619,7 @@
 			"id": "543fffc1-884d-4091-8c45-ad26115452c7",
 			"name": "access without cookie",
 			"url": "http://localhost:8080/api/versions",
-			"time": 5,
+			"time": 15,
 			"responseCode": {
 				"code": 403,
 				"name": "Forbidden"
@@ -634,7 +634,7 @@
 				}
 			},
 			"times": [
-				5
+				15
 			],
 			"allTests": [
 				{
@@ -644,7 +644,7 @@
 		}
 	],
 	"count": 1,
-	"totalTime": 4546,
+	"totalTime": 9165,
 	"collection": {
 		"requests": [
 			{

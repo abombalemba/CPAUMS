@@ -1,10 +1,13 @@
 package com.cpaums.controller;
 
+import com.cpaums.dto.AuthResponse;
 import com.cpaums.dto.LoginRequest;
+import com.cpaums.dto.RegisterRequest;
+import com.cpaums.service.AuthService;
 import com.cpaums.util.JwtUtil;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseCookie;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,14 +21,18 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class AuthController {
     
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final AuthService authService;
     
-    @Autowired
-    private JwtUtil jwtUtil;
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
+    }
     
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
@@ -38,13 +45,12 @@ public class AuthController {
         
         String jwt = jwtUtil.generateToken(userDetails.getUsername());
         
-        ResponseCookie jwtCookie = ResponseCookie.from("auth-token", jwt)
-            .path("/")
-            .maxAge(24 * 60 * 60)
-            .httpOnly(true)
-            .build();
+        Cookie jwtCookie = new Cookie("auth-token", jwt);
+        jwtCookie.setPath("/");
+        jwtCookie.setMaxAge(24 * 60 * 60);
+        jwtCookie.setHttpOnly(true);
         
-        response.addHeader("Set-Cookie", jwtCookie.toString());
+        response.addCookie(jwtCookie);
         
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("username", userDetails.getUsername());
@@ -56,13 +62,12 @@ public class AuthController {
     
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {
-        ResponseCookie cleanCookie = ResponseCookie.from("auth-token", "")
-            .path("/")
-            .maxAge(0)
-            .httpOnly(true)
-            .build();
+        Cookie cleanCookie = new Cookie("auth-token", "");
+        cleanCookie.setPath("/");
+        cleanCookie.setMaxAge(0);
+        cleanCookie.setHttpOnly(true);
         
-        response.addHeader("Set-Cookie", cleanCookie.toString());
+        response.addCookie(cleanCookie);
         return ResponseEntity.ok("Logged out successfully");
     }
     

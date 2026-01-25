@@ -40,18 +40,18 @@ public class SecurityConfig {
                 .requestMatchers("/api/versions/latest").permitAll()
                 .requestMatchers("/api/update/check").permitAll()
                 
-                .requestMatchers(HttpMethod.POST, "/api/update/log").hasAnyRole("USER", "DEVELOPER", "ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/api/devices/*/version").hasAnyRole("USER", "DEVELOPER", "ADMIN")
-                
-                .requestMatchers(HttpMethod.GET, "/api/versions/**").hasAnyRole("DEVELOPER", "ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/versions/**").hasAnyRole("USER", "DEVELOPER", "ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/versions/**").hasAnyRole("DEVELOPER", "ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/versions/**").hasAnyRole("DEVELOPER", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/api/versions/**").hasAnyRole("DEVELOPER", "ADMIN")
                 
-                .requestMatchers(HttpMethod.GET, "/api/devices/**").hasAnyRole("DEVELOPER", "ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/devices/**").hasAnyRole("DEVELOPER", "ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/api/devices/**").hasAnyRole("DEVELOPER", "ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/devices").hasAnyRole("USER", "DEVELOPER", "ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/devices").hasAnyRole("DEVELOPER", "ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/devices/user/**").hasAnyRole("USER", "DEVELOPER", "ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/devices/*/version").hasAnyRole("USER", "DEVELOPER", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/api/devices/**").hasAnyRole("DEVELOPER", "ADMIN")
+                
+                .requestMatchers(HttpMethod.POST, "/api/update/log").hasAnyRole("USER", "DEVELOPER", "ADMIN")
                 
                 .requestMatchers("/api/stats/**").hasRole("ADMIN")
                 

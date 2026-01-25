@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 public class AppVersionMapper {
     
     public AppVersionResponseDto toDto(AppVersion version) {
+        if (version == null) return null;
+        
         AppVersionResponseDto dto = new AppVersionResponseDto();
         dto.setVersion(version.getVersion());
         dto.setPlatform(version.getPlatform().name());
@@ -19,6 +21,8 @@ public class AppVersionMapper {
     }
     
     public AppVersion toEntity(CreateAppVersionRequest request) {
+        if (request == null) return null;
+        
         AppVersion version = new AppVersion();
         version.setVersion(request.getVersion());
         version.setPlatform(request.getPlatform());
