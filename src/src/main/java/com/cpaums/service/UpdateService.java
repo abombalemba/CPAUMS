@@ -72,14 +72,8 @@ public class UpdateService {
         
         updateLogRepository.save(log);
         
-        return String.format(
-            "Update logged for user %s: %s -> %s on %s. Success: %s",
-            request.getUserId(),
-            request.getFromVersion(),
-            request.getToVersion(),
-            request.getPlatform(),
-            request.isSuccess()
-        );
+        // Return a generic message that does not include user-provided input
+        return "Update logged";
     }
     
     @Transactional
