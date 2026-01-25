@@ -11,10 +11,10 @@ import java.util.Date;
 @Component
 public class JwtUtil {
     
-    @Value("${jwt.secret:defaultSecretKeyForJWTTokenSigning2026}")
+    @Value("${jwt.secret}")
     private String secret;
     
-    @Value("${jwt.expiration:86400000}")
+    @Value("${jwt.expiration}")
     private Long expiration;
     
     private SecretKey getSigningKey() {
