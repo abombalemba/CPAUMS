@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: cpaums-postgres-dev
+    environment:
+      POSTGRES_DB: cpaums
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 09122004
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data-dev:/var/lib/postgresql/data
+      - ./src/main/resources/db/migration:/docker-entrypoint-initdb.d
+    networks:
+      - cpaums-network-dev
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: cpaums-app-dev
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cpaums
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 09122004
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      JWT_SECRET: cpaumscpaumscpaumscpaumscpaums!!
+      JWT_EXPIRATION: 86400000
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/app/src
+      - ./pom.xml:/app/pom.xml
+    networks:
+      - cpaums-network-dev
+    command: mvn spring-boot:run
+
+volumes:
+  postgres-data-dev:
+
+networks:
+  cpaums-network-dev:
+    driver: bridge

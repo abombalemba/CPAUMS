@@ -1,0 +1,13 @@
+FROM maven:3.9.9-eclipse-temurin-21
+
+WORKDIR /app
+
+COPY pom.xml .
+
+RUN mvn dependency:go-offline
+
+COPY src ./src
+
+ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+
+CMD ["mvn", "spring-boot:run"]
