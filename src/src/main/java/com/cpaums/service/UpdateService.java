@@ -4,11 +4,14 @@ import com.cpaums.dto.UpdateCheckResponseDto;
 import com.cpaums.dto.UpdateLogRequestDto;
 import com.cpaums.model.AppVersion;
 import com.cpaums.model.Platform;
+import com.cpaums.model.UpdateLog;
 import com.cpaums.model.UserDevice;
 import com.cpaums.repository.AppVersionRepository;
+import com.cpaums.repository.UpdateLogRepository;
 import com.cpaums.repository.UserDeviceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,7 +23,9 @@ public class UpdateService {
     
     private final AppVersionRepository appVersionRepository;
     private final UserDeviceRepository userDeviceRepository;
+    private final UpdateLogRepository updateLogRepository;
     
+    @Transactional
     public UpdateCheckResponseDto checkUpdate(String userId, String currentVersion, Platform platform) {
         updateUserDevice(userId, currentVersion, platform);
         
@@ -55,21 +60,29 @@ public class UpdateService {
         return response;
     }
     
+    @Transactional
     public String logUpdate(UpdateLogRequestDto request) {
-        String logMessage = String.format(
-                "User %s updated from %s to %s on %s. Success: %s",
-                request.getUserId(),
-                request.getFromVersion(),
-                request.getToVersion(),
-                request.getPlatform(),
-                request.isSuccess()
+        UpdateLog log = new UpdateLog();
+        log.setUserId(request.getUserId());
+        log.setFromVersion(request.getFromVersion());
+        log.setToVersion(request.getToVersion());
+        log.setPlatform(request.getPlatform());
+        log.setSuccess(request.isSuccess());
+        log.setTimestamp(java.time.LocalDateTime.now());
+        
+        updateLogRepository.save(log);
+        
+        return String.format(
+            "Update logged for user %s: %s -> %s on %s. Success: %s",
+            request.getUserId(),
+            request.getFromVersion(),
+            request.getToVersion(),
+            request.getPlatform(),
+            request.isSuccess()
         );
-        
-        System.out.println("Update log: " + logMessage);
-        
-        return "Update logged: " + logMessage;
     }
     
+    @Transactional
     private void updateUserDevice(String userId, String currentVersion, Platform platform) {
         List<UserDevice> devices = userDeviceRepository.findByUserId(userId);
         UserDevice device = devices.isEmpty() ? new UserDevice() : devices.get(0);

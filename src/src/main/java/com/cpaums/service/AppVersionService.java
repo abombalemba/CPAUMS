@@ -10,6 +10,7 @@ import com.cpaums.model.Platform;
 import com.cpaums.repository.AppVersionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,18 +22,21 @@ public class AppVersionService {
     private final AppVersionRepository repository;
     private final AppVersionMapper mapper;
     
+    @Transactional
     public AppVersionResponseDto createVersion(CreateAppVersionRequest request) {
         AppVersion version = mapper.toEntity(request);
         AppVersion saved = repository.save(version);
         return mapper.toDto(saved);
     }
     
+    @Transactional(readOnly = true)
     public List<AppVersionResponseDto> getAllVersions() {
         return repository.findAll().stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
     }
     
+    @Transactional(readOnly = true)
     public AppVersionResponseDto getLatestVersion(Platform platform) {
         return repository
                 .findFirstByPlatformAndIsActiveTrueOrderByReleaseDateDesc(platform)
@@ -42,6 +46,7 @@ public class AppVersionService {
                 ));
     }
 
+    @Transactional(readOnly = true)
     public AppVersionResponseDto getVersionById(Long id) {
         AppVersion version = repository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException(
@@ -50,6 +55,7 @@ public class AppVersionService {
         return mapper.toDto(version);
     }
 
+    @Transactional
     public AppVersionResponseDto updateVersion(Long id, UpdateAppVersionRequest request) {
         AppVersion version = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -70,6 +76,7 @@ public class AppVersionService {
         return mapper.toDto(saved);
     }
 
+    @Transactional
     public void deleteVersion(Long id) {
         AppVersion version = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(

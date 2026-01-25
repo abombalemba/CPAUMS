@@ -1,7 +1,6 @@
 package com.cpaums.service;
 
 import com.cpaums.dto.AuthResponse;
-import com.cpaums.dto.LoginRequest;
 import com.cpaums.dto.RegisterRequest;
 import com.cpaums.exception.ValidationException;
 import com.cpaums.model.Role;
@@ -9,33 +8,25 @@ import com.cpaums.model.User;
 import com.cpaums.repository.RoleRepository;
 import com.cpaums.repository.UserRepository;
 import com.cpaums.util.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.HashSet;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
     
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
     
-    @Autowired
-    private RoleRepository roleRepository;
-    
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    
-    @Autowired
-    private JwtUtil jwtUtil;
-    
+    @Transactional
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new ValidationException("Username already exists");
@@ -45,8 +36,13 @@ public class AuthService {
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         
-        Role userRole = roleRepository.findByName("ROLE_USER")
-                .orElseThrow(() -> new RuntimeException("Role USER not found"));
+        Role userRole = roleRepository.findByName("USER")
+                .orElseGet(() -> {
+                    Role newRole = new Role();
+                    newRole.setName("USER");
+                    return roleRepository.save(newRole);
+                });
+        
         user.setRoles(new HashSet<>());
         user.getRoles().add(userRole);
         
@@ -54,16 +50,5 @@ public class AuthService {
         
         String token = jwtUtil.generateToken(savedUser.getUsername());
         return new AuthResponse(savedUser.getUsername(), token);
-    }
-    
-    public AuthResponse login(LoginRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-        );
-        
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        
-        String token = jwtUtil.generateToken(request.getUsername());
-        return new AuthResponse(request.getUsername(), token);
     }
 }
