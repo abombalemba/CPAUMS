@@ -1,0 +1,1051 @@
+{
+	"info": {
+		"_postman_id": "329ae6e0-5a93-4d35-a2b2-8ee036e96f3a",
+		"name": "CPAUMS with Auth FIXED",
+		"description": "API endpoints with authentication tests - FIXED VERSION",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20606298"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "register new user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testuser_new\",\n    \"password\": \"Test123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/auth/register",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login as ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Login successful\", function() {\n    pm.response.to.have.status(200);\n    pm.expect(pm.response.headers.get(\"Set-Cookie\")).to.include(\"auth-token\");\n});\n\nvar cookie = pm.response.headers.get(\"Set-Cookie\");\nif (cookie) {\n    var jwtCookie = cookie.match(/auth-token=([^;]+)/);\n    if (jwtCookie && jwtCookie[1]) {\n        pm.collectionVariables.set(\"admin_token\", jwtCookie[1]);\n        console.log(\"Admin token saved: \" + jwtCookie[1].substring(0, 20) + \"...\");\n    }\n}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/auth/login",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login as DEVELOPER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Developer login successful\", function() {\n    pm.response.to.have.status(200);\n    pm.expect(pm.response.headers.get(\"Set-Cookie\")).to.include(\"auth-token\");\n});\n\nvar cookie = pm.response.headers.get(\"Set-Cookie\");\nif (cookie) {\n    var jwtCookie = cookie.match(/auth-token=([^;]+)/);\n    if (jwtCookie && jwtCookie[1]) {\n        pm.collectionVariables.set(\"dev_token\", jwtCookie[1]);\n        console.log(\"Developer token saved\");\n    }\n}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"dev\",\n    \"password\": \"dev\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/auth/login",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login as USER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"User login successful\", function() {\n    pm.response.to.have.status(200);\n    pm.expect(pm.response.headers.get(\"Set-Cookie\")).to.include(\"auth-token\");\n});\n\nvar cookie = pm.response.headers.get(\"Set-Cookie\");\nif (cookie) {\n    var jwtCookie = cookie.match(/auth-token=([^;]+)/);\n    if (jwtCookie && jwtCookie[1]) {\n        pm.collectionVariables.set(\"user_token\", jwtCookie[1]);\n        console.log(\"User token saved\");\n    }\n}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"user1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/auth/login",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/auth/logout",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login with wrong password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"wrongpass\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/auth/login",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AppVersion CRUD (with Auth)",
+			"item": [
+				{
+					"name": "get all versions (unauthorized)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Should return 403\", function() {\n    pm.expect(pm.response.code).to.equal(403);\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/api/versions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all versions (as USER)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"User can read versions\", function() {\n    pm.response.to.have.status(200);\n    pm.response.to.be.json;\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.be.an(\"array\");\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/versions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all versions (as ADMIN)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Admin can read versions\", function() {\n    pm.response.to.have.status(200);\n    pm.response.to.be.json;\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.be.an(\"array\");\n    console.log(\"Found \" + jsonData.length + \" versions\");\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/versions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create new version (as USER - should fail)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"User cannot create versions\", function() {\n    pm.response.to.have.status(403);\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "auth-token={{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"version\": \"4.0.0\",\n    \"platform\": \"android\",\n    \"releaseDate\": \"2026-02-01T10:00:00\",\n    \"changelog\": \"Новая фича\",\n    \"updateType\": \"mandatory\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/versions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create new version (as ADMIN)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Admin can create versions\", function() {\n    pm.response.to.have.status(201);\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "auth-token={{admin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"version\": \"4.0.0\",\n    \"platform\": \"android\",\n    \"releaseDate\": \"2026-02-01T10:00:00\",\n    \"changelog\": \"Новая фича\",\n    \"updateType\": \"mandatory\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/versions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create new version (as DEVELOPER)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Developer can create versions\", function() {\n    pm.response.to.have.status(201);\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "auth-token={{dev_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"version\": \"4.1.0\",\n    \"platform\": \"ios\",\n    \"releaseDate\": \"2026-02-02T10:00:00\",\n    \"changelog\": \"Dev created version\",\n    \"updateType\": \"optional\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/versions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get version by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/versions/1",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get latest version (public - no auth needed)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/api/versions/latest?platform=android",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "platform",
+									"value": "android"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update version (as USER - should fail)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"User cannot update versions\", function() {\n    pm.response.to.have.status(403);\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "auth-token={{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"changelog\": \"Обновленный changelog\",\n    \"updateType\": \"MANDATORY\",\n    \"isActive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/versions/1",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update version (as ADMIN)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "auth-token={{admin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"changelog\": \"Обновленный changelog\",\n    \"updateType\": \"MANDATORY\",\n    \"isActive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/versions/1",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete version (as USER - should fail)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"User cannot delete versions\", function() {\n    pm.response.to.have.status(403);\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/versions/1",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete version (as ADMIN)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/versions/1",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserDevice CRUD (with Auth)",
+			"item": [
+				{
+					"name": "create device (as USER)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "auth-token={{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"test_user_1\",\n    \"platform\": \"ANDROID\",\n    \"currentVersion\": \"2.0.0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/devices",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all devices (as USER)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/devices",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all devices (as ADMIN - full access)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/devices",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update & Stats (Mixed Auth)",
+			"item": [
+				{
+					"name": "check update (public - no auth)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/api/update/check?userId=test123&current=1.0.0&platform=IOS",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"update",
+								"check"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "test123"
+								},
+								{
+									"key": "current",
+									"value": "1.0.0"
+								},
+								{
+									"key": "platform",
+									"value": "IOS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "log update (as USER)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "auth-token={{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"test123\",\n    \"fromVersion\": \"1.0.0\",\n    \"toVersion\": \"2.0.0\",\n    \"platform\": \"IOS\",\n    \"success\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/update/log",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"update",
+								"log"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get stats (as ADMIN only)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Only admin can see stats\", function() {\n    if (pm.response.code === 200) {\n        pm.response.to.be.json;\n        var jsonData = pm.response.json();\n        pm.expect(jsonData).to.have.property(\"globalUpdateRate\");\n    }\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/stats/updates",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"stats",
+								"updates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get stats (as USER - should fail)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"User cannot see stats\", function() {\n    pm.response.to.have.status(403);\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token={{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/stats/updates",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"stats",
+								"updates"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Error Tests with Auth",
+			"item": [
+				{
+					"name": "access with expired token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTUxNjIzOTAyMn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/versions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "access with invalid token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token=invalid.token.here",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/versions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "access without cookie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Should return 403 without cookie\", function() {\n    pm.response.to.have.status(403);\n});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/api/versions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "http://localhost:8080",
+			"type": "default"
+		},
+		{
+			"key": "admin_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "dev_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

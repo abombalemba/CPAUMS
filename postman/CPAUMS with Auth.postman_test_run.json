@@ -1,0 +1,764 @@
+{
+	"id": "6712d1f6-5737-4a0a-a5bc-3d86982514aa",
+	"name": "CPAUMS with Auth",
+	"timestamp": "2026-01-25T20:01:28.396Z",
+	"collection_id": "20606298-f16d1c60-e876-45c5-91ff-e7ec965e8fc4",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 13,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2026-01-25T20:01:20.996Z",
+	"totalFail": 1,
+	"results": [
+		{
+			"id": "085976d1-add1-47d2-85f1-a9c24157a2e0",
+			"name": "register new user",
+			"url": "http://localhost:8080/api/auth/register",
+			"time": 18,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "570302ca-7799-4b1e-927f-750985e6a80d",
+			"name": "login as ADMIN",
+			"url": "http://localhost:8080/api/auth/login",
+			"time": 750,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login successful": true
+			},
+			"testPassFailCounts": {
+				"Login successful": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				750
+			],
+			"allTests": [
+				{
+					"Login successful": true
+				}
+			]
+		},
+		{
+			"id": "a65d22c9-202e-402c-bc68-67de7cebb89c",
+			"name": "login as DEVELOPER",
+			"url": "http://localhost:8080/api/auth/login",
+			"time": 599,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Developer login successful": true
+			},
+			"testPassFailCounts": {
+				"Developer login successful": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				599
+			],
+			"allTests": [
+				{
+					"Developer login successful": true
+				}
+			]
+		},
+		{
+			"id": "2570d3ce-ee47-4f00-94b0-8c6bba5ce9c7",
+			"name": "login as USER",
+			"url": "http://localhost:8080/api/auth/login",
+			"time": 775,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"User login successful": true
+			},
+			"testPassFailCounts": {
+				"User login successful": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				775
+			],
+			"allTests": [
+				{
+					"User login successful": true
+				}
+			]
+		},
+		{
+			"id": "0838842e-76fe-482a-b0b8-6fef158cabbc",
+			"name": "logout",
+			"url": "http://localhost:8080/api/auth/logout",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				22
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1f4e6388-e7ae-4c4b-b8df-44e1c87e98c7",
+			"name": "login with wrong password",
+			"url": "http://localhost:8080/api/auth/login",
+			"time": 791,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				791
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "554f759f-7751-44fd-bde4-4c8560f83690",
+			"name": "get all versions (unauthorized)",
+			"url": "http://localhost:8080/api/versions",
+			"time": 14,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Should return 403": true
+			},
+			"testPassFailCounts": {
+				"Should return 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Should return 403": true
+				}
+			]
+		},
+		{
+			"id": "d44a84b9-f20a-469d-a4d8-11c452cd40dc",
+			"name": "get all versions (as USER)",
+			"url": "http://localhost:8080/api/versions",
+			"time": 19,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"User can read versions": false
+			},
+			"testPassFailCounts": {
+				"User can read versions": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				19
+			],
+			"allTests": [
+				{
+					"User can read versions": false
+				}
+			]
+		},
+		{
+			"id": "65a8ec38-b7ab-4fa4-b063-71511dbbe53e",
+			"name": "get all versions (as ADMIN)",
+			"url": "http://localhost:8080/api/versions",
+			"time": 39,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Admin can read versions": true
+			},
+			"testPassFailCounts": {
+				"Admin can read versions": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				39
+			],
+			"allTests": [
+				{
+					"Admin can read versions": true
+				}
+			]
+		},
+		{
+			"id": "7df2ccfa-7aaa-432a-8338-e640a4679bdc",
+			"name": "create new version (as USER - should fail)",
+			"url": "http://localhost:8080/api/versions",
+			"time": 28,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"User cannot create versions": true
+			},
+			"testPassFailCounts": {
+				"User cannot create versions": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				28
+			],
+			"allTests": [
+				{
+					"User cannot create versions": true
+				}
+			]
+		},
+		{
+			"id": "54ae0466-23ba-4689-bb0e-d4b19c2b293a",
+			"name": "create new version (as ADMIN)",
+			"url": "http://localhost:8080/api/versions",
+			"time": 245,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Admin can create versions": true
+			},
+			"testPassFailCounts": {
+				"Admin can create versions": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				245
+			],
+			"allTests": [
+				{
+					"Admin can create versions": true
+				}
+			]
+		},
+		{
+			"id": "2b93210c-bc8b-4838-98a0-d4f1c9a8f113",
+			"name": "create new version (as DEVELOPER)",
+			"url": "http://localhost:8080/api/versions",
+			"time": 36,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Developer can create versions": true
+			},
+			"testPassFailCounts": {
+				"Developer can create versions": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				36
+			],
+			"allTests": [
+				{
+					"Developer can create versions": true
+				}
+			]
+		},
+		{
+			"id": "82337708-c5ec-43dd-bcb7-8825e0f13d48",
+			"name": "get version by id",
+			"url": "http://localhost:8080/api/versions/1",
+			"time": 27,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				27
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a5d46eba-c24d-4d52-b6a3-d10e92e4dc4e",
+			"name": "get latest version (public - no auth needed)",
+			"url": "http://localhost:8080/api/versions/latest?platform=android",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "05fa8eb0-e1be-4844-8f4d-8a613695637f",
+			"name": "update version (as USER - should fail)",
+			"url": "http://localhost:8080/api/versions/1",
+			"time": 31,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"User cannot update versions": true
+			},
+			"testPassFailCounts": {
+				"User cannot update versions": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				31
+			],
+			"allTests": [
+				{
+					"User cannot update versions": true
+				}
+			]
+		},
+		{
+			"id": "a89472a8-cfcd-4841-9083-1d05dec1c788",
+			"name": "update version (as ADMIN)",
+			"url": "http://localhost:8080/api/versions/1",
+			"time": 82,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				82
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d583f1e6-6dfc-416a-8a6a-f8923bead586",
+			"name": "delete version (as USER - should fail)",
+			"url": "http://localhost:8080/api/versions/1",
+			"time": 21,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"User cannot delete versions": true
+			},
+			"testPassFailCounts": {
+				"User cannot delete versions": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21
+			],
+			"allTests": [
+				{
+					"User cannot delete versions": true
+				}
+			]
+		},
+		{
+			"id": "19644128-af64-4096-8e83-548a7271b6dd",
+			"name": "delete version (as ADMIN)",
+			"url": "http://localhost:8080/api/versions/1",
+			"time": 37,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				37
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d7ef4673-bdac-40e7-b1de-187e94aba8f9",
+			"name": "create device (as USER)",
+			"url": "http://localhost:8080/api/devices",
+			"time": 21,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				21
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c7e1525f-616e-4b41-a5bc-ca6a5d4fc627",
+			"name": "get all devices (as USER)",
+			"url": "http://localhost:8080/api/devices",
+			"time": 20,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f96992bc-d561-401b-9125-0c79a940146d",
+			"name": "get all devices (as ADMIN - full access)",
+			"url": "http://localhost:8080/api/devices",
+			"time": 39,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				39
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e27c3dd7-da5a-4bb4-923b-f448f6a68e47",
+			"name": "check update (public - no auth)",
+			"url": "http://localhost:8080/api/update/check?userId=test123&current=1.0.0&platform=IOS",
+			"time": 34,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				34
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "7cf4ec86-38b9-4071-aaae-aada59efe5df",
+			"name": "log update (as USER)",
+			"url": "http://localhost:8080/api/update/log",
+			"time": 38,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				38
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "adb758f9-95d6-4ebf-9e81-c5906d70f584",
+			"name": "get stats (as ADMIN only)",
+			"url": "http://localhost:8080/api/stats/updates",
+			"time": 802,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Only admin can see stats": true
+			},
+			"testPassFailCounts": {
+				"Only admin can see stats": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				802
+			],
+			"allTests": [
+				{
+					"Only admin can see stats": true
+				}
+			]
+		},
+		{
+			"id": "98291f5f-623f-4656-a0bf-b13484905b0d",
+			"name": "get stats (as USER - should fail)",
+			"url": "http://localhost:8080/api/stats/updates",
+			"time": 18,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"User cannot see stats": true
+			},
+			"testPassFailCounts": {
+				"User cannot see stats": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"User cannot see stats": true
+				}
+			]
+		},
+		{
+			"id": "c53128f9-8524-4ef8-8004-0f1e4fbfaabc",
+			"name": "access with expired token",
+			"url": "http://localhost:8080/api/versions",
+			"time": 8,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "85f574e7-524a-4378-95f2-ba5ce3c04d82",
+			"name": "access with invalid token",
+			"url": "http://localhost:8080/api/versions",
+			"time": 9,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "543fffc1-884d-4091-8c45-ad26115452c7",
+			"name": "access without cookie",
+			"url": "http://localhost:8080/api/versions",
+			"time": 5,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Should return 403 without cookie": true
+			},
+			"testPassFailCounts": {
+				"Should return 403 without cookie": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Should return 403 without cookie": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 4546,
+	"collection": {
+		"requests": [
+			{
+				"id": "085976d1-add1-47d2-85f1-a9c24157a2e0",
+				"method": "POST"
+			},
+			{
+				"id": "570302ca-7799-4b1e-927f-750985e6a80d",
+				"method": "POST"
+			},
+			{
+				"id": "a65d22c9-202e-402c-bc68-67de7cebb89c",
+				"method": "POST"
+			},
+			{
+				"id": "2570d3ce-ee47-4f00-94b0-8c6bba5ce9c7",
+				"method": "POST"
+			},
+			{
+				"id": "0838842e-76fe-482a-b0b8-6fef158cabbc",
+				"method": "POST"
+			},
+			{
+				"id": "1f4e6388-e7ae-4c4b-b8df-44e1c87e98c7",
+				"method": "POST"
+			},
+			{
+				"id": "554f759f-7751-44fd-bde4-4c8560f83690",
+				"method": "GET"
+			},
+			{
+				"id": "d44a84b9-f20a-469d-a4d8-11c452cd40dc",
+				"method": "GET"
+			},
+			{
+				"id": "65a8ec38-b7ab-4fa4-b063-71511dbbe53e",
+				"method": "GET"
+			},
+			{
+				"id": "7df2ccfa-7aaa-432a-8338-e640a4679bdc",
+				"method": "POST"
+			},
+			{
+				"id": "54ae0466-23ba-4689-bb0e-d4b19c2b293a",
+				"method": "POST"
+			},
+			{
+				"id": "2b93210c-bc8b-4838-98a0-d4f1c9a8f113",
+				"method": "POST"
+			},
+			{
+				"id": "82337708-c5ec-43dd-bcb7-8825e0f13d48",
+				"method": "GET"
+			},
+			{
+				"id": "a5d46eba-c24d-4d52-b6a3-d10e92e4dc4e",
+				"method": "GET"
+			},
+			{
+				"id": "05fa8eb0-e1be-4844-8f4d-8a613695637f",
+				"method": "PUT"
+			},
+			{
+				"id": "a89472a8-cfcd-4841-9083-1d05dec1c788",
+				"method": "PUT"
+			},
+			{
+				"id": "d583f1e6-6dfc-416a-8a6a-f8923bead586",
+				"method": "DELETE"
+			},
+			{
+				"id": "19644128-af64-4096-8e83-548a7271b6dd",
+				"method": "DELETE"
+			},
+			{
+				"id": "d7ef4673-bdac-40e7-b1de-187e94aba8f9",
+				"method": "POST"
+			},
+			{
+				"id": "c7e1525f-616e-4b41-a5bc-ca6a5d4fc627",
+				"method": "GET"
+			},
+			{
+				"id": "f96992bc-d561-401b-9125-0c79a940146d",
+				"method": "GET"
+			},
+			{
+				"id": "e27c3dd7-da5a-4bb4-923b-f448f6a68e47",
+				"method": "GET"
+			},
+			{
+				"id": "7cf4ec86-38b9-4071-aaae-aada59efe5df",
+				"method": "POST"
+			},
+			{
+				"id": "adb758f9-95d6-4ebf-9e81-c5906d70f584",
+				"method": "GET"
+			},
+			{
+				"id": "98291f5f-623f-4656-a0bf-b13484905b0d",
+				"method": "GET"
+			},
+			{
+				"id": "c53128f9-8524-4ef8-8004-0f1e4fbfaabc",
+				"method": "GET"
+			},
+			{
+				"id": "85f574e7-524a-4378-95f2-ba5ce3c04d82",
+				"method": "GET"
+			},
+			{
+				"id": "543fffc1-884d-4091-8c45-ad26115452c7",
+				"method": "GET"
+			}
+		]
+	}
+}
