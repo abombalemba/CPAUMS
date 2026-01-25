@@ -6,6 +6,7 @@ import com.cpaums.model.Platform;
 import com.cpaums.repository.AppVersionRepository;
 import com.cpaums.repository.UserDeviceRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/stats")
 @RequiredArgsConstructor
@@ -23,6 +25,8 @@ public class StatsController {
     
     @GetMapping("/updates")
     public UpdateStatsDto getUpdateStats() {
+        log.info("Getting update statistics");
+        
         UpdateStatsDto stats = new UpdateStatsDto();
         
         Map<Platform, Integer> usersCount = new HashMap<>();
@@ -40,6 +44,9 @@ public class StatsController {
                 long countLatest = userDeviceRepository
                     .countByPlatformAndCurrentVersion(platform, latestVersion.getVersion());
                 latestVersionUsers += countLatest;
+                
+                log.debug("Platform {}: total users={}, latest version users={}", 
+                         platform, count, countLatest);
             }
         }
         
@@ -53,6 +60,9 @@ public class StatsController {
         } else {
             stats.setGlobalUpdateRate(0.0);
         }
+        
+        log.info("Statistics calculated: totalUsers={}, updateRate={}%", 
+                 totalUsers, stats.getGlobalUpdateRate());
         
         return stats;
     }
